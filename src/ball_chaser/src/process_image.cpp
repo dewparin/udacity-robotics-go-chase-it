@@ -31,8 +31,9 @@ void process_image_callback(const sensor_msgs::Image img)
 {
 
     int white_pixel = 255;
-    const int left_bound_index = img.width / 3;
+    const int left_bound_index = img.step / 3;
     const int right_bound_index = left_bound_index * 2;
+    // ROS_INFO("Left bound: %d, right bound: %d", left_bound_index, right_bound_index);
 
     // TODO: Loop through each pixel in the image and check if there's a bright white one
     // Then, identify if this pixel falls in the left, mid, or right side of the image
@@ -40,17 +41,20 @@ void process_image_callback(const sensor_msgs::Image img)
     // Request a stop when there's no white ball seen by the camera
     bool found_ball = false;
     direction target_direction;
-    for (int i = 0; i < img.height * img.step; i++)
+    auto length = img.height * img.step;
+    for (int i = 0; i < length; i++)
     {
         if (img.data[i] == white_pixel)
         {
             found_ball = true;
-            int col_index = i % img.width;
+            int col_index = i % img.step;
+            // ROS_INFO("Found ball at col index: %d", col_index);
             if (col_index < left_bound_index)
             {
                 target_direction = left;
             }
-            else if (col_index < right_bound_index)
+            else if (col_index >= left_bound_index &&
+                     col_index <= right_bound_index)
             {
                 target_direction = middle;
             }
@@ -68,12 +72,15 @@ void process_image_callback(const sensor_msgs::Image img)
         switch (target_direction)
         {
         case left:
+            // ROS_INFO("Found ball at direction: left");
             drive_robot(0.0, 0.5);
             break;
         case middle:
+            // ROS_INFO("Found ball at direction: middle");
             drive_robot(0.5, 0.0);
             break;
         case right:
+            // ROS_INFO("Found ball at direction: right");
             drive_robot(0.0, -0.5);
             break;
 
