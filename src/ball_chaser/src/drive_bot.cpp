@@ -21,6 +21,16 @@ bool handle_drive_request(ball_chaser::DriveToTarget::Request &req, ball_chaser:
     // Publish angles to drive the robot
     motor_command_publisher.publish(motor_command);
 
+    // wait 3 seconds for robot to move
+    if (req.linear_x > 0)
+    {
+        ros::Duration(0.5).sleep();
+    }
+    else if (req.angular_z > 0)
+    {
+        ros::Duration(0.1).sleep();
+    }
+
     res.msg_feedback = "Linear x set - " + std::to_string(motor_command.linear.x) + ", Angular z set - " + std::to_string(motor_command.angular.z);
     ROS_INFO_STREAM(res.msg_feedback);
 
