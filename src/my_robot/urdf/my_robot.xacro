@@ -205,20 +205,20 @@
 
     <link name="left_front_horn">
         <inertial>
-            <origin xyz="0.15 0.0 0.0" rpy="0.0 0.0 0.0" />
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
             <mass value="0.1" />
             <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
         </inertial>
         <collision name="left_front_horn_collision">
-            <origin xyz="0.15 0.0 0.0" rpy="0.0 0.0 0.0" />
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
             <geometry>
-                <box size="0.3 0.02 0.05" />
+                <box size="0.2 0.02 0.05" />
             </geometry>
         </collision>
         <visual name="left_front_horn_visual">
-            <origin xyz="0.15 0.0 0.0" rpy="0.0 0.0 0.0" />
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
             <geometry>
-                <box size="0.3 0.02 0.05" />
+                <box size="0.2 0.02 0.05" />
             </geometry>
         </visual>
     </link>
@@ -232,20 +232,20 @@
 
     <link name="right_front_horn">
         <inertial>
-            <origin xyz="0.15 0.0 0.0" rpy="0.0 0.0 0.0" />
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
             <mass value="0.1" />
             <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
         </inertial>
         <collision name="right_front_horn_collision">
-            <origin xyz="0.15 0.0 0.0" rpy="0.0 0.0 0.0" />
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
             <geometry>
-                <box size="0.3 0.02 0.05" />
+                <box size="0.2 0.02 0.05" />
             </geometry>
         </collision>
         <visual name="right_front_horn_visual">
-            <origin xyz="0.15 0.0 0.0" rpy="0.0 0.0 0.0" />
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
             <geometry>
-                <box size="0.3 0.02 0.05" />
+                <box size="0.2 0.02 0.05" />
             </geometry>
         </visual>
     </link>
