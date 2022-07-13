@@ -29,7 +29,7 @@ void drive_robot(float lin_x, float ang_z)
 // This callback function continuously executes and reads the image data
 void process_image_callback(const sensor_msgs::Image img)
 {
-
+    ROS_INFO("got img height: %d, width: %d, step: %d", img.height, img.width, img.step);
     int white_pixel = 255;
     const int left_bound_index = img.step / 3;
     const int right_bound_index = left_bound_index * 2;
@@ -42,9 +42,11 @@ void process_image_callback(const sensor_msgs::Image img)
     bool found_ball = false;
     direction target_direction;
     auto length = img.height * img.step;
-    for (int i = 0; i < length; i++)
+    for (int i = 0; i < length; i += 3)
     {
-        if (img.data[i] == white_pixel)
+        if (img.data[i] == white_pixel &&
+            img.data[i + 1] == white_pixel &&
+            img.data[i + 2] == white_pixel)
         {
             found_ball = true;
             int col_index = i % img.step;
@@ -54,7 +56,7 @@ void process_image_callback(const sensor_msgs::Image img)
                 target_direction = left;
             }
             else if (col_index >= left_bound_index &&
-                     col_index <= right_bound_index)
+                     col_index < right_bound_index)
             {
                 target_direction = middle;
             }
@@ -73,7 +75,7 @@ void process_image_callback(const sensor_msgs::Image img)
         {
         case left:
             // ROS_INFO("Found ball at direction: left");
-            drive_robot(0.0, 0.5);
+            drive_robot(0.0, 0.3);
             break;
         case middle:
             // ROS_INFO("Found ball at direction: middle");
@@ -81,7 +83,7 @@ void process_image_callback(const sensor_msgs::Image img)
             break;
         case right:
             // ROS_INFO("Found ball at direction: right");
-            drive_robot(0.0, -0.5);
+            drive_robot(0.0, -0.3);
             break;
 
         default:
