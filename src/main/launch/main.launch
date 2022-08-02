@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+
+    <!-- my_robot nodes -->
+    <include file="$(find my_robot)/launch/world.launch" />
+
+    <!-- ball chaser nodes -->
+    <include file="$(find ball_chaser)/launch/ball_chaser.launch" />
+
+</launch>
